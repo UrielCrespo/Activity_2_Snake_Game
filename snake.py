@@ -13,6 +13,15 @@ from turtle import *
 
 from freegames import square, vector
 
+colors = ['blue', 'green', 'yellow', 'purple', 'orange']
+
+snake_color = choice(colors)
+food_color = choice(colors)
+
+
+while food_color == snake_color:
+    food_color = choice(colors)
+
 food = vector(0, 0)
 snake = [vector(10, 0)]
 aim = vector(0, -10)
@@ -48,29 +57,15 @@ def move():
     else:
         snake.pop(0)
     
-    move_food()
     clear()
 
     for body in snake:
-        square(body.x, body.y, 9, "black")
+        square(body.x, body.y, 9, snake_color)
 
-    square(food.x, food.y, 9, "green")
+    square(food.x, food.y, 9, food_color)
     update()
     ontimer(move, 100)
 
-
-def move_food():
-    """Move food randomly one step without leaving window."""
-    directions = [(10, 0), (-10, 0), (0, 10), (0, -10)]
-    dx, dy = choice(directions)
-
-    new_x = food.x + dx
-    new_y = food.y + dy
-
-    # verificar límites
-    if -200 < new_x < 190 and -200 < new_y < 190:
-        food.x = new_x
-        food.y = new_y
 
 setup(420, 420, 370, 0)
 hideturtle()
