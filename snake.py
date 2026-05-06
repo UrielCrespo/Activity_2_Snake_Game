@@ -38,6 +38,17 @@ def inside(head):
     return -200 < head.x < 190 and -200 < head.y < 190
 
 
+def move_food():
+    """Move food one random step, staying inside boundaries."""
+    directions = [vector(10, 0), vector(-10, 0), vector(0, 10), vector(0, -10)]
+    step = choice(directions)
+    new_x = food.x + step.x
+    new_y = food.y + step.y
+    if -200 < new_x < 190 and -200 < new_y < 190:
+        food.x = new_x
+        food.y = new_y
+
+
 def move():
     """Move snake forward one segment."""
     head = snake[-1].copy()
